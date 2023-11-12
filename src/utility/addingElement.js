@@ -6,6 +6,7 @@ const addElem = (elem, classes, parent) =>  {
         });
     }
     parent.appendChild(createdElem) ; 
+    return createdElem ; 
 }
 
 export default addElem;
