@@ -14,5 +14,103 @@ body {
     background-color: rgba(240,240,240,1);
     font-family: Barlow, Arial, sans-serif;
     color: rgba(50,50,50,1);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+h1{
+    font-size: 1.5rem;
+}
+
+p{
+    width: 100%;
+}
+
+.todo-list-container {
+    width: 500px;
+    max-width: 500px;
+    background-color: white;
+    box-shadow: 0 0 30px rgba(150,150,150,0.25);
+}
+
+.row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom : 1px solid rgba(220,220,220,1);
+}
+
+.todo__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem ;
+}
+
+
+
+form{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(220,220,220,1);
+}
+
+form i {
+    color: rgba(150,150,150,1);
+    padding-right: 1.5rem;
+}
+
+input{
+    width: 100%;
+    border: none;
+    font-size: 1rem;
+    color: rgba(50,50,50,1);
+    background-color: transparent;
+}
+
+input::placeholder, input:focus, input{
+    outline: none;
+}
+
+.checkbox {
+    width: fit-content;
+    margin-right: 1rem;
+    
+}
+
+.button{
+    color: rgba(50,50,50,1);
+    font-size: 1rem;
+    font-weight: 900;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border: none;
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(220,220,220,1);
+    transition: background-color 500ms ease-in-out;
+}
+
+.button:hover{
+    background-color: rgba(210,210,210,1) ;
+}
+
+.strike-through {
+    text-decoration: line-through;
+    color: rgba(150,150,150,1);
+}
+
+
+
+.font-awesome-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 

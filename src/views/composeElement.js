@@ -1,35 +1,66 @@
 import addElem from "../utility/addingElement";
+import Tasklist from "../utility/taskListUtility";
+import { renderListUpdate } from "./render-list-update";
 
 const ComposeElement = {
-    _mainContainer : document.querySelector('.todo-list-container'),
+    // global variabel 
+    _mainContainer : null,
+    _inputContainer: null,
+    _listContainer : null,
+    _taskList : null, 
+    _inputText : null, 
 
     init(){
-        this._initialDOM() ; 
-        
+        this._initialDOM(); 
+        this._renderDataToDOM();
     },
 
     _initialDOM() {
+        this._renderMainContainer();
+    },
+
+    _renderMainContainer() {
+        this._mainContainer = document.querySelector('.todo-list-container') ; 
         this._mainContainer.innerHTML = `
         <div class="row">
             <h1>Today's To Do</h1>
             <i class="fa-solid fa-rotate fa-lg font-awesome-icon"></i>
         </div>
         `;
-        const inputContainer =  addElem('form', [], this._mainContainer) ;
-        const inputText = addElem('input', ['input__add'],inputContainer ) ; 
-        inputText.setAttribute('placeholder', 'Add your task here') ; 
-        addElem('i', ['fa-solid', 'fa-arrow-right-to-bracket', 'fa-sm', 'font-awesome-icon'], inputContainer) ;
-
+        this._inputContainer =  addElem('form', ['row'], this._mainContainer) ;
+        this._inputText = addElem('input', ['input__add'],this._inputContainer) ; 
+        this._inputText.setAttribute('placeholder', 'Add your task here') ; 
+        addElem('i', ['fa-solid', 'fa-arrow-right-to-bracket', 'fa-sm', 'font-awesome-icon'], this._inputContainer) ;
         // Functionalities Element
-        const listContainer = addElem('div', [], this._mainContainer) ; 
+        this._listContainer = addElem('div', [], this._mainContainer) ; 
         const clearButton = addElem('button', ['button'], this._mainContainer) ;
         clearButton.textContent = 'Clear all completed' ; 
+    }, 
 
+    _renderDataToDOM(){
+        this._taskList = new Tasklist() ;
+        //render data on first load
+        renderListUpdate({
+            taskData : this._taskList.data, 
+            listContainer : this._listContainer,
+        });
+        
+        
+    }, 
+
+    _initListener(){
         // ListenerToFunctionalities
-        inputContainer.onsubmit = (e) => {
+        this._inputContainer.onsubmit = (e) => {
             e.preventDefault() ; 
-            
+            console.log('Klik tombol') ;
+            this._taskList.addTask(this._inputText.value);
+            this._inputContainer.reset(); 
+            renderListUpdate({
+                taskData : this._taskList.data, 
+                listContainer : this._listContainer,
+            });
         }
-
-    },
+    }
 }
+
+export default ComposeElement ; 
