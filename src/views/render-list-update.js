@@ -4,6 +4,7 @@ import addElem from "../utility/addingElement";
 
 export const renderListUpdate = ({taskData, listContainer}) => {
     _initialDOM(taskData, listContainer) ;
+    console.log('memanggil render list update');
 };
 
 
@@ -25,6 +26,14 @@ const _initialDOM = (taskData, listContainer) => {
                 todoContainer.style.backgroundColor = 'rgb(255, 253, 204)';
                 threeDot.classList.add('hide');
                 removeBtn.classList.remove('hide');
+
+
+                todoDescription.onchange = () => {
+                    console.log('rename happened');
+                    taskData.renameTask(task._id, todoDescription.value);
+                    renderListUpdate({taskData : taskData, listContainer : listContainer,})
+                }
+                
             } else {
                 todoContainer.style.backgroundColor = 'transparent';
                 threeDot.classList.remove('hide');
@@ -36,6 +45,10 @@ const _initialDOM = (taskData, listContainer) => {
             taskData.removeTask(task._id);
             renderListUpdate({taskData : taskData, listContainer : listContainer,})
         }
+
+       
+
+
     });
 
 }

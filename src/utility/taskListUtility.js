@@ -42,7 +42,22 @@ export default class Tasklist {
     removeTask(taskId) {
         this.data = this.data.filter( task => task._id !== taskId);
         LocalStorageUtility.addTaskToLocalStorage(this.data);
-
+        this.id= this.data.length + 1;
     }
 
+    renameTask(taskId, newTask) {
+        const newDataArray = [];
+        this.data.forEach(task => {
+            console.log(task);
+            if(task._id === taskId){
+                newDataArray.push({...task, _description: newTask});
+                console.log(newDataArray);
+            } else{
+                newDataArray.push(task);
+            }
+        });
+        this.data = newDataArray;
+        console.log(this.data); 
+        LocalStorageUtility.addTaskToLocalStorage(this.data);
+    }
 }
