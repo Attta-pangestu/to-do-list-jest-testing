@@ -7,12 +7,13 @@ const ComposeElement = {
     _mainContainer : null,
     _inputContainer: null,
     _listContainer : null,
-    _taskList : null, 
+    _taskList : new Tasklist(), 
     _inputText : null, 
 
     init(){
         this._initialDOM(); 
         this._renderDataToDOM();
+        this._initListener();
     },
 
     _initialDOM() {
@@ -38,28 +39,27 @@ const ComposeElement = {
     }, 
 
     _renderDataToDOM(){
-        this._taskList = new Tasklist() ;
         //render data on first load
         renderListUpdate({
-            taskData : this._taskList.data, 
+            taskData : this._taskList, 
             listContainer : this._listContainer,
         });
-        
         
     }, 
 
     _initListener(){
-        // ListenerToFunctionalities
+        // Listener to input task submit
         this._inputContainer.onsubmit = (e) => {
             e.preventDefault() ; 
+            e.stopPropagation();
             console.log('Klik tombol') ;
             this._taskList.addTask(this._inputText.value);
             this._inputContainer.reset(); 
-            renderListUpdate({
-                taskData : this._taskList.data, 
-                listContainer : this._listContainer,
-            });
+            this._renderDataToDOM(); 
         }
+
+        //
+
     }
 }
 

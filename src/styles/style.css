@@ -95,10 +95,16 @@ input::placeholder, input:focus, input{
     padding: 1.5rem;
     border-bottom: 1px solid rgba(220,220,220,1);
     transition: background-color 500ms ease-in-out;
+    cursor: pointer;
 }
 
 .button:hover{
     background-color: rgba(210,210,210,1) ;
+}
+
+button {
+    cursor: pointer;
+    border: none;
 }
 
 .strike-through {
@@ -112,5 +118,11 @@ input::placeholder, input:focus, input{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* Functionalities */
+
+.hide {
+    display: none;
 }
 

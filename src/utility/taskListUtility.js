@@ -12,7 +12,7 @@ export default class Tasklist {
     _initUpdateDataArray() {
         //get from local storage if there's data
         if(LocalStorageUtility.isStorageAvailable()) {
-            const dataTask = JSON.parse(localStorage.getItem(Config.LOCAL_STORAGE_NAME)) ; 
+            const dataTask = LocalStorageUtility.getAllTaskFromLocalStorage() ; 
             console.log('local storage is available') ; 
             // if data not empty, update data array
             if(dataTask && dataTask.length !== 0) {
@@ -34,9 +34,15 @@ export default class Tasklist {
             console.log('Data Object Task : ', taskObj); 
             this.data.push(taskObj);
             // update to local Storage
-            localStorage.setItem(Config.LOCAL_STORAGE_NAME, JSON.stringify(this.data)) ; 
+            LocalStorageUtility.addTaskToLocalStorage(this.data);
             window.alert('Task successly recorded'); 
         }
+    }
+
+    removeTask(taskId) {
+        this.data = this.data.filter( task => task._id !== taskId);
+        LocalStorageUtility.addTaskToLocalStorage(this.data);
+
     }
 
 }

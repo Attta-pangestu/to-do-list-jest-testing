@@ -1,3 +1,5 @@
+import Config from "../global/config";
+
 const LocalStorageUtility = {
 
     isStorageAvailable () {
@@ -14,7 +16,18 @@ const LocalStorageUtility = {
             return false ;
         } 
     }, 
+
+    addTaskToLocalStorage(taskArrayObj) {
+        localStorage.setItem(Config.LOCAL_STORAGE_NAME, JSON.stringify(taskArrayObj));
+    }, 
+
+    getAllTaskFromLocalStorage() {
+        return JSON.parse(localStorage.getItem(Config.LOCAL_STORAGE_NAME)) ; 
+    }, 
     
+    removeTaskFromLocalStorage(task) {
+        localStorage.removeItem(Config.LOCAL_STORAGE_NAME, task );
+    }
 
 
 
