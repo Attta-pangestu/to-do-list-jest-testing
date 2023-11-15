@@ -27,7 +27,8 @@ const LocalStorageUtility = {
     
     removeTaskFromLocalStorage() {
         localStorage.removeItem(Config.LOCAL_STORAGE_NAME);
-    }
+    }, 
+
 
 
 

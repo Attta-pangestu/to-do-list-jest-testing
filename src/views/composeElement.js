@@ -49,7 +49,12 @@ const ComposeElement = {
     }, 
 
     _initListener(){
-        // Listener to input task submit
+        // Listener to add task submit
+        this._addTaskListener();
+        this._clearAllTaskListener();
+    }, 
+
+    _addTaskListener() {
         this._inputContainer.onsubmit = (e) => {
             e.preventDefault() ; 
             e.stopPropagation();
@@ -58,8 +63,10 @@ const ComposeElement = {
             this._inputContainer.reset(); 
             this._renderDataToDOM(); 
         }
+    }, 
 
-        //listener 
+    _clearAllTaskListener() {
+         //listener 
         this._clearButton.onclick = () => {
             this._taskList.removeAllTask();
             this._listContainer.innerHTML = '';
