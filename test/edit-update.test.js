@@ -4,6 +4,7 @@
 import Tasklist from "../src/utility/taskListUtility";
 import { renderListUpdate } from "../src/views/render-list-update";
 import LocalStorageUtility from "../src/data/local-storage-utility";
+import { experiments } from "webpack";
 
 
 const taskListObj = new Tasklist();
@@ -46,4 +47,31 @@ describe('To check functionalities edit, update, and clear are working properly'
         expect(newTodoDescription)
         .toBe(task2New);
     })
+
+    //test completed update status
+    // On Local Storage
+    test('Change completed update test for Task 1 on local storage', () => {
+        taskListObj.updateCompleted(task2New, true); 
+        const task2Status = taskListObj.data
+        .filter((task) => task._description === task2New)[0]._completed;
+        console.log(task2Status);
+        expect(task2Status).toEqual(true);
+    });
+    //check status on DOM
+    test('Change completed update on DOM', () => {
+        renderListUpdate({
+            taskData: taskListObj, 
+            listContainer: document.body, 
+        });
+        const task2Element = document.querySelectorAll('.checkbox')[1].checked ; 
+        expect(task2Element).toBe(true);
+    });
+
+    //clear all task
+    // On Local Storage
+    test('Remove all task check on local storage', () => {
+        taskListObj.removeAllTask(); 
+        expect(LocalStorageUtility.getAllTaskFromLocalStorage()).toBeNull();
+    });
+
 });
