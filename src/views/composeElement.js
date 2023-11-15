@@ -9,6 +9,7 @@ const ComposeElement = {
     _listContainer : null,
     _taskList : new Tasklist(), 
     _inputText : null, 
+    _clearButton : null,
 
     init(){
         this._initialDOM(); 
@@ -34,8 +35,8 @@ const ComposeElement = {
         addElem('i', ['fa-solid', 'fa-arrow-right-to-bracket', 'fa-sm', 'font-awesome-icon'], this._inputContainer) ;
         // Functionalities Element
         this._listContainer = addElem('div', [], this._mainContainer) ; 
-        const clearButton = addElem('button', ['button'], this._mainContainer) ;
-        clearButton.textContent = 'Clear all completed' ; 
+        this._clearButton = addElem('button', ['button'], this._mainContainer) ;
+        this._clearButton.textContent = 'Clear all completed' ; 
     }, 
 
     _renderDataToDOM(){
@@ -58,8 +59,11 @@ const ComposeElement = {
             this._renderDataToDOM(); 
         }
 
-        //
-
+        //listener 
+        this._clearButton.onclick = () => {
+            this._taskList.removeAllTask();
+            this._listContainer.innerHTML = '';
+        }
     }
 }
 

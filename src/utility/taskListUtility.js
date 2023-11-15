@@ -51,7 +51,7 @@ export default class Tasklist {
             console.log(task);
             if(task._id === taskId){
                 newDataArray.push({...task, _description: newTask});
-                console.log(newDataArray);
+                console.log( 'ditemukan data yang diubah', newDataArray);
             } else{
                 newDataArray.push(task);
             }
@@ -59,5 +59,20 @@ export default class Tasklist {
         this.data = newDataArray;
         console.log(this.data); 
         LocalStorageUtility.addTaskToLocalStorage(this.data);
+    }
+
+    updateCompleted(taskDescription, status) {
+        this.data = this.data.map(task => {
+            if(task._description === taskDescription) {
+                return {...task, _completed : status};
+            } 
+            return task;
+        })
+        console.log(this.data);
+        LocalStorageUtility.addTaskToLocalStorage(this.data);
+    }
+
+    removeAllTask() {
+        LocalStorageUtility.removeTaskFromLocalStorage();
     }
 }

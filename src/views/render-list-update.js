@@ -14,12 +14,14 @@ const _initialDOM = (taskData, listContainer) => {
         const todoContainer = addElem('div', ['todo__item', 'todo-list-container'], listContainer); 
         const checkBox = addElem('input', ['checkbox'], todoContainer) ; 
         checkBox.setAttribute('type', 'checkbox');
+        checkBox.setAttribute(task._completed? 'checked' : 'not-checked', '');
         const todoDescription = addElem('input',['todo__item__description', task._completed?'strike-through' : 'through'], todoContainer) ; 
         todoDescription.value = task._description ; 
         const threeDot = addElem('i', ['fa-solid', 'fa-ellipsis-vertical', 'fa-lg', 'font-awesome-icon'], todoContainer);
         const removeBtn = addElem('button', ['hide', 'remove-button'], todoContainer);
         const removeIcon = addElem('i', ['fa-solid', 'fa-trash-can', 'fa-lg', 'font-awesome-icon'], removeBtn);
         
+
         // Give event handler
         document.body.addEventListener('click',() => {
             if(document.activeElement === todoDescription) {
@@ -46,8 +48,12 @@ const _initialDOM = (taskData, listContainer) => {
             renderListUpdate({taskData : taskData, listContainer : listContainer,})
         }
 
-       
-
+        checkBox.onclick = (e) => {
+            e.preventDefault();
+            console.log('Checked checkbox');
+            taskData.updateCompleted(task._description, checkBox.checked);
+            renderListUpdate({taskData : taskData, listContainer : listContainer,}); 
+        }
 
     });
 

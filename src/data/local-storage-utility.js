@@ -25,8 +25,8 @@ const LocalStorageUtility = {
         return JSON.parse(localStorage.getItem(Config.LOCAL_STORAGE_NAME)) ; 
     }, 
     
-    removeTaskFromLocalStorage(task) {
-        localStorage.removeItem(Config.LOCAL_STORAGE_NAME, task );
+    removeTaskFromLocalStorage() {
+        localStorage.removeItem(Config.LOCAL_STORAGE_NAME);
     }
 
 
