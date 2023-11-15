@@ -85,13 +85,60 @@ describe('Check Localstorage and DOM while adding task',() => {
 
 // remove items 
 describe('Test while remove items', () => {
-    // remove task 1
+    // remove task 1 on localStorage
     test('Remove Task 1 From LocalStorage', () => {
         taskList.removeTask(2);
         expect(LocalStorageUtility.getAllTaskFromLocalStorage())
         .toEqual([
-            {_description: "tidur nyenyak", _id: 3, _completed: false },
+            {_description: `${task2}`, _id: 3, _completed: false },
             {_description: `${task3}`, _id: 4, _completed: false } 
         ]);
     });
+    // remove task 1 on DOM
+    test('Remove Task From DOM ', () => {
+        renderListUpdate({
+            taskData: taskList, 
+            listContainer: document.body, 
+        });
+        const taskElement = document.querySelectorAll('.todo__item'); 
+        expect(taskElement.length)
+        .toBe(2);
+    });
+
+        // remove task 2 on localStorage
+        test('Remove Task 1 From LocalStorage', () => {
+            taskList.removeTask(3);
+            expect(LocalStorageUtility.getAllTaskFromLocalStorage())
+            .toEqual([
+                {_description: `${task3}`, _id: 4, _completed: false } 
+            ]);
+        });
+        // remove task 2 on DOM
+        test('Remove Task From DOM ', () => {
+            renderListUpdate({
+                taskData: taskList, 
+                listContainer: document.body, 
+            });
+            const taskElement = document.querySelectorAll('.todo__item'); 
+            expect(taskElement.length)
+            .toBe(1);
+        });
+
+        
+        // remove task 3 on localStorage
+        test('Remove Task 1 From LocalStorage', () => {
+            taskList.removeTask(4);
+            expect(LocalStorageUtility.getAllTaskFromLocalStorage())
+            .toEqual([]);
+        });
+        // remove task 3 on DOM
+        test('Remove Task From DOM ', () => {
+            renderListUpdate({
+                taskData: taskList, 
+                listContainer: document.body, 
+            });
+            const taskElement = document.querySelectorAll('.todo__item'); 
+            expect(taskElement.length)
+            .toBe(0);
+        });
 });
