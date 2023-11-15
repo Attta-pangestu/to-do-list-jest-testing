@@ -4,8 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1", 
+    "test": "jest --verbose --coverage", 
     "start-dev" : "webpack serve --open --port 9000 "
+  },
+  "jest" : {
+    "resetMocks" : false, 
+    "setupFiles" : [
+      "jest-localstorage-mock"
+    ]
   },
   "keywords": [],
   "author": "",

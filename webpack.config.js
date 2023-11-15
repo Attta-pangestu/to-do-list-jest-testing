@@ -39,5 +39,8 @@ module.exports = {
         new HtmlWebpackPlugin({
             template : path.resolve(__dirname, 'src/template/index.html'), 
         }), 
-    ]
+    ], 
+    optimization: {
+        runtimeChunk: 'single',
+    },
 }
